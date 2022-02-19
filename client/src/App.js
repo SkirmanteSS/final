@@ -9,21 +9,29 @@ function App() {
   const [userAge, setUserAge ] = useState('');
   const [regUsersList, setRegUsersList] = useState([])
 
-  useEffect(() => {
-    Axios.get("http://localhost:1337/api/get").then((response) => {
-      setRegUsersList(response.data)
-    });
-  }, []);
 
   const submitUser = () => {
     Axios.post("http://localhost:1337/api/insert", {
       userName: userName, 
       userEmail: userEmail, 
-      userAge: userAge
-    }).then(() => {
-      alert("Successful insert");
-    })
+      userAge: userAge,
+    });
+   
+    setRegUsersList([
+      ...regUsersList,
+      { userName: userName, userEmail: userEmail, userAge: userAge },
+    ]);
   }; 
+
+  useEffect(() => {
+    Axios.get("http://localhost:1337/api/get").then((response) => {
+      setRegUsersList(response.data);
+    });
+  }, []);
+
+  const deleteUser = (name) => {
+    Axios.delete(`http://localhost:1337/api/delete/${name}`)
+  }
 
   return (
     <div className="App">
@@ -42,16 +50,26 @@ function App() {
       <input type='text' name='age' onChange = {(e)=> {
         setUserAge(e.target.value)
       }} />
-      
+      </div>
 
-      <button onClick = {submitUser}> Submit </button>
+      <button onClick={submitUser}>Submit</button>
 
       {regUsersList.map((val) => {
-        return <h1> After registering: {val.userName} | {val.userEmail} | {val.userAge}</h1>
+        return (
+          <div className='List'>
+            <h1>List of registered participants</h1>
+            <h3> Name: {val.userName}</h3> 
+            <h3> Email:{val.userEmail}</h3>  
+            <h3> Age:{val.userAge}</h3>
+
+            <button onClick={() => {deleteUser(val.userName)}}>Delete</button>
+            <input type="text" id="updateInput" />
+            <button>Update</button>
+          </div>
+        );
       })}
-      </div>
     </div>
   );
-}
+};
 
 export default App;

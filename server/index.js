@@ -33,6 +33,29 @@ app.post("/api/insert", (req, res) => {
         console.log(err);
 });
 
+app.delete('/api/delete/:userName', (req, res) => {
+  const name = req.params.userName 
+  const sqlDelete = 
+  "DELETE FROM regUsers WHERE userName = ?"; 
+
+  db.query(sqlDelete, name, (err, result) => {
+    if (err) console.log(err);  
+  });
+});
+
+app.put('/api/update', (req, res) => {
+    const name = req.body.userName;
+    const email = req.body.userEmail ;
+    const age = req.body.userAge ;
+    const sqlUpdate = 
+    "UPDATE SET user userName = ? WHERE userName = ?"; 
+  
+    db.query(sqlUpdate, [name, email, age], (err, result) => {
+      if (err) console.log(err);  
+    });
+  });
+
+
 app.listen(1337, () => {
     console.log('running on port 1337')
 
