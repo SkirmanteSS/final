@@ -2,13 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
+
 const mysql = require('mysql');
 
-const db = mysql.createPool({
+const db = mysql.createConnection({
     host: 'localhoost',
     user: 'root',
     password: 'root',
-    database: 'googledatabase',
+    database: 'userslistdatabase',
 });
 
 
@@ -30,7 +31,7 @@ app.post("/api/insert", (req, res) => {
 
     const sqlInsert = "INSERT INTO user (userName, userEmail, userAge) VALUES (?, ?, ?);"
     db.query(sqlInsert, [userName, userEmail, userAge], (err, result) => {});
-        console.log(err);
+        console.log(result);
 });
 
 app.delete('/api/delete/:userName', (req, res) => {
@@ -50,7 +51,7 @@ app.put('/api/update', (req, res) => {
     const sqlUpdate = 
     "UPDATE SET user userName = ? WHERE userName = ?"; 
   
-    db.query(sqlUpdate, [name, email, age], (err, result) => {
+    db.query(sqlUpdate, [name, email], (err, result) => {
       if (err) console.log(err);  
     });
   });
