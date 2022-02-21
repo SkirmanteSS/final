@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: antiquewhite;
 }
 
 .form {
@@ -10,9 +12,24 @@
   font-size: 30px;
 }
 
-.form input{
-width: 300px;
-height: 60px;
-margin: 10;
-font-size: 30px;
+.form input {
+  width: 300px;
+  height: 60px;
+  margin: 10;
+  font-size: 30px;
+
+}
+
+.table {
+  width: 500px;
+  height: 170;
+  border: 2px solid black;
+  border-radius: 12;
+  margin: 10px;
+}
+
+#updateInput {
+  width: 100px;
+  height: 20px;
+  margin-bottom: 10px;
 }

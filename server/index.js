@@ -49,7 +49,7 @@ app.put('/api/update', (req, res) => {
     const email = req.body.userEmail ;
     const age = req.body.userAge ;
     const sqlUpdate = 
-    "UPDATE SET user userName = ? WHERE userName = ?"; 
+    "UPDATE regUsers SET userName = ? WHERE userEmail = ? WHERE userAge = ?"; 
   
     db.query(sqlUpdate, [name, email], (err, result) => {
       if (err) console.log(err);  
