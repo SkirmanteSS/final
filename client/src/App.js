@@ -49,9 +49,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Register aplication</h1>
+      
 
-      <div className='form'>
+    <div className='form'>
+      <h1>Check in for the trip</h1>
         <label>User name</label>
         <input type='text' name='name' onChange = {(e)=> {
           setUserName(e.target.value)
@@ -65,7 +66,7 @@ function App() {
           setUserAge(e.target.value)
         }} 
         />
-      </div>
+      
       
         <button onClick={submitUser}>Submit</button>
 
@@ -73,8 +74,8 @@ function App() {
       {regUsersList.map((val) => {
         return ( 
           <div className='table'>
-            <h1>New User Name: {val.userName} </h1>| 
-            <h1>User Email: {val.userEmail} | User Age: {val.userAge}</h1>
+            <h1>Traveler Name: {val.userName} </h1> 
+            <h1>Email: {val.userEmail} | Age: {val.userAge}</h1>
             <button onClick={() => {deleteUser(val.userName)}}> Delete </button>
             <input type='text' id='updateInput' onChange={(e)=>
               setNewUserName(e.target.value)
@@ -83,7 +84,7 @@ function App() {
           </div>
         );
       })}  
-      
+      </div>
     </div>
   );
 };
